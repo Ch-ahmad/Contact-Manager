@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Contacts
+  ul
+    each contact in contacts
+      li
+        | #{contact.firstName} #{contact.lastName} - #{contact.email}
+        a(href="/users/edit-contact/" + contact.id) Edit
+        form(method="POST", action="/users/delete-contact/" + contact.id)
+          input(type="hidden", name="_method", value="DELETE")
+          button(type="submit") Delete

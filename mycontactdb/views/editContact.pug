@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Edit Contact
+  form(method='POST', action='/users/edit-contact/' + contact.id)
+    input(type='text', name='firstName', value=contact.firstName, placeholder='First Name', required)
+    input(type='text', name='lastName', value=contact.lastName, placeholder='Last Name', required)
+    input(type='email', name='email', value=contact.email, placeholder='Email')
+    textarea(name='notes', placeholder='Notes')= contact.notes
+    button(type='submit') Update Contact
