@@ -2,11 +2,20 @@ extends layout
 
 block content
   h1 Contacts
-  ul
-    each contact in contacts
-      li
-        | #{contact.firstName} #{contact.lastName} - #{contact.email}
-        a(href="/users/edit-contact/" + contact.id) Edit
-        form(method="POST", action="/users/delete-contact/" + contact.id)
-          input(type="hidden", name="_method", value="DELETE")
-          button(type="submit") Delete
+  tables
+    thead
+      tr
+        th First Name
+        th Last Name
+        th Emails
+        th Actions
+    tbody
+      each contact in contacts
+        tr
+          td= contact.firstName
+          td= contact.lastName
+          td= contact.email
+          td
+            a(href=`/users/edit-contact/${contact.id}`) Edit
+            form(action=`/users/delete-contact/${contact.id}`, method="POST", style="display: inline;")
+              button(type="submit") Delete
