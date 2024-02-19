@@ -31,14 +31,22 @@ function writeContacts(contacts) {
   fs.writeFileSync(contactsPath, JSON.stringify(contacts, null, 2));
 }
 
+function formatTimes(contact) {
+  return {
+    ...contact,
+    createdFormatted: new Date(contact.created).toLocaleString(),
+    lastEditedFormatted: new Date(contact.lastEdited).toLocaleString()
+  };
+}
+
 app.get('/', (req, res) => res.render('index'));
 
-app.get('/contacts', (req, res) => res.render('contacts', { contacts: readContacts() }));
+app.get('/contacts', (req, res) => res.render('contacts', { contacts: readContacts().map(formatTimes) }));
 
 app.get('/contacts/new', (req, res) => res.render('new'));
 
 app.get('/contacts/:id', (req, res) => {
-  const contact = readContacts().find(c => c.id === req.params.id);
+  const contact = readContacts().map(formatTimes).find(c => c.id === req.params.id);
   if (!contact) res.status(404).send('Contact not found');
   else res.render('contact', { contact });
 });
@@ -52,7 +60,7 @@ app.post('/contacts', (req, res) => {
 });
 
 app.get('/contacts/:id/edit', (req, res) => {
-  const contact = readContacts().find(c => c.id === req.params.id);
+  const contact = readContacts().map(formatTimes).find(c => c.id === req.params.id);
   res.render('editContact', { contact });
 });
 
