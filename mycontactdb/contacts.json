@@ -1,4 +1,11 @@
-{
-    "contacts": []
+[
+  {
+    "id": "3d2242a2-67c9-4e73-bc88-7db8665f9d6c",
+    "firstName": "Ahmad ",
+    "lastName": "Yamien",
+    "email": "ayamien@hawk.iit.edu",
+    "notes": "Hello Professor!",
+    "created": "2024-02-19T08:55:46.526Z",
+    "lastEdited": "2024-02-19T08:55:46.526Z"
   }
-  
+]

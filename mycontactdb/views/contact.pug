@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/css/style.css')
+  .container
+    h1.text-center= contact.firstName + ' ' + contact.lastName
+    table(style="width: 100%; margin-top: 20px;")
+      tr
+        th Email:
+        th Notes:
+        th Created:
+        th Last Edited:
+      tr
+        td #{contact.email}
+        td #{contact.notes ? contact.notes : 'No notes available'}
+        td #{contact.createdFormatted}
+        td #{contact.lastEditedFormatted}
+    .contact-actions(style="margin-top: 20px;")
+      a(href=`/contacts/${contact.id}/edit`).btn.mb-20 Edit
+      br
+      form(method='POST', action=`/contacts/${contact.id}?_method=DELETE`, style='display: inline;')
+        button(type='submit').btn.mb-20 Delete
